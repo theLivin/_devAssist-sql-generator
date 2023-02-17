@@ -1,4 +1,5 @@
 import textwrap
+from api.role import Role
 from api.user import User, OnboardedUser
 import random
 
@@ -7,7 +8,7 @@ class Mentor(OnboardedUser):
 
     def __init__(self, id=random.randint(1, 10)):
         super().__init__(id)
-        self.user = User(id)
+        self.user = User(id, Role.MENTOR.value)
 
     def insert(self):
         q =  textwrap.dedent(f'''insert into "mentor" ({','.join(f'"{col}"' for col in Mentor.COLUMNS)}) values ({self});''')
