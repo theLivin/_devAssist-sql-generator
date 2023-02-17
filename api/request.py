@@ -28,6 +28,6 @@ class Request:
         return [self.id, self.mentor_id, self.mentee_id, self.created_at, self.updated_at, self.message]
     
     def insert(self):
-        q = textwrap.dedent(f'''insert into "request" ({','.join(f'"{col}"' for col in self.COLUMNS)}) values ({self});''')
+        q = textwrap.dedent(f'''insert into "request" ({','.join(f'"{col}"' for col in Request.COLUMNS)}) values ({self});''')
 
         return textwrap.dedent(f'''{self.mentor.insert()}{self.mentee.insert()}{q}\n''')

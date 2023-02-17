@@ -44,7 +44,7 @@ class User:
         return [str(self.id), self.email, self.first_name, self.last_name, self.role, self.profile_photo]
     
     def insert(self):
-        return textwrap.dedent(f'''insert into "user" ({','.join(f'"{col}"' for col in self.COLUMNS)}) values ({self});\n''')
+        return textwrap.dedent(f'''insert into "user" ({','.join(f'"{col}"' for col in User.COLUMNS)}) values ({self});\n''')
 
 
 class OnboardedUser:
