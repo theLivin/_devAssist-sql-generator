@@ -1,15 +1,22 @@
 import textwrap
 from api.role import Role
-from api.user import User, OnboardedUser
+from api.user import User
+from api.mentee import Mentee
 import random
 
-class Mentor(OnboardedUser):
-    COLUMNS = ["mentor_id", "bio", "experience_field", "experience_level", "skills"]
+class Mentor:
+    COLUMNS = ["mentor_id"]
 
     def __init__(self, id=random.randint(1, 10)):
-        super().__init__(id)
-        self.user = User(id, Role.MENTOR.value)
+        self.id = str(id)
+        self.mentee = Mentee(id)
+
+    def __repr__(self) -> str:
+        return f"""{','.join(val if val.isdigit() else f"'{val}'" for val in self.data())}"""
+
+    def data(self):
+        return [self.id]
 
     def insert(self):
         q =  textwrap.dedent(f'''insert into "mentor" ({','.join(f'"{col}"' for col in Mentor.COLUMNS)}) values ({self});''')
-        return textwrap.dedent(f'''{self.user.insert()}{q}\n''')
+        return textwrap.dedent(f'''{self.mentee.insert()}{q}\n''')

@@ -8,12 +8,14 @@ from api.role import Role
 fake = Faker()
 
 class User:
-    COLUMNS = ["id", "email", "first_name", "last_name", "role", "profile_photo"]
+    COLUMNS = ["id", "email", "first_name", "last_name", "role", "profile_photo", "created_at"]
     PHOTO_URL = "https://xsgames.co/randomusers/assets/avatars/"
 
     def __init__(self, id=random.randint(1, 10), role=Role.DEFAULT.value):
         self.id = str(id)
         self.role = role
+
+        self.created_at = "now()"
 
         profile = fake.profile()
         name = profile['name'].split()
@@ -41,7 +43,7 @@ class User:
         return f"""{','.join(val if val.isdigit() else f"'{val}'" for val in self.data())}"""
 
     def data(self):
-        return [str(self.id), self.email, self.first_name, self.last_name, self.role, self.profile_photo]
+        return [str(self.id), self.email, self.first_name, self.last_name, self.role, self.profile_photo, self.created_at]
     
     def insert(self):
         return textwrap.dedent(f'''insert into "user" ({','.join(f'"{col}"' for col in User.COLUMNS)}) values ({self});\n''')
