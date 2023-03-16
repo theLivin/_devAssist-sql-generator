@@ -9,7 +9,7 @@ class Mentor:
 
     def __init__(self, id=random.randint(1, 10)):
         self.id = str(id)
-        self.mentee = Mentee(id)
+        self.mentee = Mentee(id, Role.MENTOR.value)
 
     def __repr__(self) -> str:
         return f"""{','.join(val if val.isdigit() else f"'{val}'" for val in self.data())}"""
