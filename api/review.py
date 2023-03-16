@@ -27,7 +27,7 @@ class Review:
         self.mentee_id = str(mentee_id)
         self.mentor = Mentor(mentor_id)
         self.mentee = Mentee(mentee_id)
-        self.rating = "{:.2f}".format((random.random()*10)+1)
+        self.rating = "{:.2f}".format(random.random()*5)
 
 
     def __repr__(self) -> str:
